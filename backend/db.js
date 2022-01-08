@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoURI = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb"
+const mongoURI = "mongodb://127.0.0.1:27017/inotebook?compressors=disabled&gssapiServiceName=mongodb"
 
 const connectToMongo = async () => {
     mongoose.connect(mongoURI, () => {
