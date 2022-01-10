@@ -42,7 +42,7 @@ router.post('/createuser', [
         }
 
         const authtoken = jwt.sign(data, JWT_SECRET);
-        // console.log(authtoken);
+        console.log(authtoken);
 
 
         res.json({authtoken})
@@ -90,6 +90,8 @@ router.post('/login', [
         }
 
         const authtoken = jwt.sign(data, JWT_SECRET);
+        console.log(authtoken);
+
         res.json({authtoken})
     } catch (error) {
         console.error(error.message);
@@ -102,7 +104,7 @@ router.post('/login', [
 router.post('/getuser', fetchuser, async (req, res)=>{
     try {
         userId = req.user.id;
-        const user = await User.findOne(userId).select("-password");
+        const user = await User.findById(userId).select("-password");
         res.send(user);
     } catch (error) {
         console.error(error.message);
