@@ -15,6 +15,7 @@ import Navbar from "./Component/Navbar";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/Home/About";
 import NoteState from "./Context/notes/NoteState";
+import { Alert } from "./Component/Alert";
 
 function App() {
   React.useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
             <NoteState>
                 <Router>
                     <Navbar />
+                    <Alert message={"error"} />
                     <div className="container">
                         <Switch>
                             <Route exact path="/">
