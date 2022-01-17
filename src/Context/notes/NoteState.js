@@ -41,9 +41,9 @@ const NoteState = (props) => {
     }
 
     // Edit a Note
-    const editNote = async (_id, title, description, tag) => {
+    const editNote = async (id, title, description, tag) => {
         // API call 
-        const response = await fetch(`${host}/api/notes/updatenote/${_id}`, {
+        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -51,25 +51,28 @@ const NoteState = (props) => {
             },
             body: JSON.stringify({title, description, tag}) 
         });
-        // const json = response.json();
+        const json = await response.json();
 
+        let newNote = JSON.parse(JSON.stringify(notes))
         // Logic to edit client
-        for (let index = 0; index < notes.length; index++) {
-            const element = notes[index];
-            if(element._id  === _id ) {
-                element.title = title;
-                element.description = description;
-                element.tag = tag;
+        for (let index = 0; index < newNote.length; index++) {
+            const element = newNote[index];
+            if(element._id  === id ) {
+                newNote[index].title = title;
+                newNote[index].description = description;
+                newNote[index].tag = tag;
+                break;
             }
-            
         }
+        console.log(newNote);
+        setNotes(newNote);
     }
 
     // Delete Note
-    const deleteNote = async (_id) => {
-        console.log("Deleting a note with id" + _id);
+    const deleteNote = async (id) => {
+        console.log("Deleting a note with id" + id);
         // API call 
-        const response = await fetch(`${host}/api/notes/deletenote/${_id}`, {
+        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
@@ -77,7 +80,7 @@ const NoteState = (props) => {
             },
         });
         const json = response.json(); 
-        const newNotes = notes.filter((note) => { return note.id !== _id })
+        const newNotes = notes.filter((note) => { return note._id !== id })
         setNotes(newNotes);
     }
 

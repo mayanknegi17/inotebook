@@ -16,6 +16,8 @@ import Home from "./Pages/Home/Home";
 import About from "./Pages/Home/About";
 import NoteState from "./Context/notes/NoteState";
 import { Alert } from "./Component/Alert";
+import Signup from "./Pages/LoginPage/Signup";
+import Login from "./Pages/LoginPage/Login";
 
 function App() {
   React.useEffect(() => {
@@ -27,8 +29,8 @@ function App() {
             <NoteState>
                 <Router>
                     <Navbar />
-                    <Alert message={"error"} />
-                    <div className="container">
+                    {/* <Alert message={"error"} /> */}
+                    {/* <div className="container"> */}
                         <Switch>
                             <Route exact path="/">
                                 <Home />
@@ -36,8 +38,14 @@ function App() {
                             <Route exact path="/about">
                                 <About />
                             </Route>
+                            <Route exact path="/login">
+                                <Login />
+                            </Route>
+                            <Route exact path="/signup">
+                                <Signup />
+                            </Route>
                         </Switch>
-                    </div>
+                    {/* </div> */}
 
                     {/* <LoginPage /> */}
                 </Router>
