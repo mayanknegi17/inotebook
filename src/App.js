@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,34 +15,46 @@ import Navbar from "./Component/Navbar";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/Home/About";
 import NoteState from "./Context/notes/NoteState";
-import { Alert } from "./Component/Alert";
 import Signup from "./Pages/LoginPage/Signup";
 import Login from "./Pages/LoginPage/Login";
+import Alert from "./Component/Alert";
 
 function App() {
-  React.useEffect(() => {
-    document.title = AppConstants.APP_NAME;
-  }, []);
+    React.useEffect(() => {
+        document.title = AppConstants.APP_NAME;
+    }, []);
+
+    const [alert, setAlert] = useState(null);
+
+    const showAlert = (message, type) => {
+        setAlert({
+            msg: message,
+            type: type
+        })
+        setTimeout(() => {
+            setAlert(null);
+        }, 10000);
+    }
 
     return (
         <>
             <NoteState>
                 <Router>
                     <Navbar />
-                    {/* <Alert message={"error"} /> */}
+                    <Alert alert={alert} />
                     {/* <div className="container"> */}
                         <Switch>
                             <Route exact path="/">
-                                <Home />
+                                <Home showAlert={showAlert} />
                             </Route>
                             <Route exact path="/about">
                                 <About />
                             </Route>
                             <Route exact path="/login">
-                                <Login />
+                                <Login showAlert={showAlert} />
                             </Route>
                             <Route exact path="/signup">
-                                <Signup />
+                                <Signup showAlert={showAlert} />
                             </Route>
                         </Switch>
                     {/* </div> */}
