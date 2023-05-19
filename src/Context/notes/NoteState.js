@@ -51,7 +51,7 @@ const NoteState = (props) => {
             },
             body: JSON.stringify({title, description, tag}) 
         });
-        const json = await response.json();
+        // const json = await response.json();
 
         let newNote = JSON.parse(JSON.stringify(notes))
         // Logic to edit client
@@ -79,7 +79,7 @@ const NoteState = (props) => {
               'auth-token': localStorage.getItem('token')
             },
         });
-        const json = response.json(); 
+        // const json = response.json(); 
         const newNotes = notes.filter((note) => { return note._id !== id })
         setNotes(newNotes);
     }

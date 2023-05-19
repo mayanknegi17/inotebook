@@ -5,8 +5,6 @@ import {
   Route,
 } from "react-router-dom";
 
-// Custom components
-import LoginPage from "./Pages/LoginPage/LoginPage";
 import * as AppConstants from "./Constants/AppContants";
 
 // Styles
